@@ -4,15 +4,14 @@
   "info": {
     "singularName": "key",
     "pluralName": "keys",
-    "displayName": "freefire_bypass_emulator",
-    "description": ""
+    "displayName": "key"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "key": {
+    "bypass_key": {
       "type": "string"
     }
   }
