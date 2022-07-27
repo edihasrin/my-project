@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "freefires",
+  "info": {
+    "singularName": "freefire",
+    "pluralName": "freefires",
+    "displayName": "freefire"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "bypass_key": {
+      "type": "string"
+    }
+  }
+}
