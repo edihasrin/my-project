@@ -2,12 +2,12 @@ module.exports = {
   routes: [
     {
       method: "GET",
-      path: "/delete/:key",
+      path: "/delete/semua",
       handler: "delete.hapusSatu",
     },
     {
       method: "GET",
-      path: "/delete/semua",
+      path: "/delete/:key",
       handler: "delete.hapusSatu",
     },
     {
