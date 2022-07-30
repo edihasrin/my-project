@@ -34,7 +34,7 @@ module.exports = {
             // 3 min = 180000 ms
             // 2 min = 120000 ms
             // 1 min = 60000 ms
-            if (selisihWaktu > 120000) {
+            if (selisihWaktu > 30000) {
               return i.id;
             }
           })
