@@ -15,15 +15,6 @@ module.exports = {
       // console.log(id);
 
       const data = await strapi.service("api::delete.delete").hapusSatu(key);
-      // console.log(data, "data");
-      // console.log("datanya adalah", ctx.params);
-      // console.log("id nya", ctx.params.id);
-
-      // const response = await strapi.db.query("api::key.key").findOne({
-      //   where: {
-      //     id: id,
-      //   },
-      // });
 
       return data;
 

@@ -4,55 +4,49 @@ module.exports = {
     try {
       // fetching data
       const entries = await strapi.db.query("api::key.key").findMany({
-        select: ["id", "bypass_key"],
+        select: ["id", "bypass_key", "createdAt"],
       });
-      //   const entries = await strapi.entityService.findMany("api::key.key", {
-      //     fields: ["id", "bypass_key"],
-      //   });
 
-      // reduce the data to the format we want to return
-      let entriesReduced;
-      if (entries && Array.isArray(entries)) {
-        entriesReduced = entries.reduce((acc, item) => {
-          acc = acc || [];
-          acc.push({
-            id: item.id,
-            bypass_key: item.bypass_key || "",
-          });
-          return acc;
-        }, []);
-      }
-
-      // return the reduced data
-      return entriesReduced;
+      return entries;
     } catch (err) {
       return err;
     }
   },
   hapusSatu: async (key) => {
     try {
-      //   // fetching data
-      //   const entries = await strapi.db.query("api::key.key").findOne({
-      //     where: { bypass_key: key },
-      //   });
       const entries = await strapi.db.query("api::key.key").delete({
         where: { bypass_key: key },
       });
 
-      //   // reduce the data to the format we want to return
-      //   let entriesReduced;
-      //   if (entries && Array.isArray(entries)) {
-      //     entriesReduced = entries.reduce((acc, item) => {
-      //       acc = acc || [];
-      //       acc.push({
-      //         id: item.id,
-      //         bypass_key: item.bypass_key || "",
-      //       });
-      //       return acc;
-      //     }, []);
-      //   }
+      const semuaData = await strapi.db.query("api::key.key").findMany({
+        select: ["id", "bypass_key", "createdAt"],
+      });
 
-      //   // return the reduced data
+      // hapus key semua key jika sudah kadaluarsa
+      if (semuaData.length !== 0) {
+        let idDataExpiry = semuaData
+          .filter((i) => {
+            let waktuPembuatanKey = new Date(i.createdAt);
+            let waktuSekarang = Date.now();
+            let selisihWaktu = Math.abs(waktuSekarang - waktuPembuatanKey);
+            // 30 min = 1800000 ms
+            // 10 min = 600000 ms
+            // 3 min = 180000 ms
+            // 2 min = 120000 ms
+            // 1 min = 60000 ms
+            if (selisihWaktu > 120000) {
+              return i.id;
+            }
+          })
+          .map((i) => i.id);
+
+        await strapi.db.query("api::key.key").deleteMany({
+          where: {
+            id: idDataExpiry,
+          },
+        });
+      }
+
       return entries;
     } catch (err) {
       return err;
