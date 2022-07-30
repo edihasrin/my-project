@@ -7,6 +7,11 @@ module.exports = {
     },
     {
       method: "GET",
+      path: "/delete/semua",
+      handler: "delete.hapusSatu",
+    },
+    {
+      method: "GET",
       path: "/delete",
       handler: "delete.lihatSemua",
     },
