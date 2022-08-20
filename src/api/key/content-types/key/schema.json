@@ -4,7 +4,8 @@
   "info": {
     "singularName": "key",
     "pluralName": "keys",
-    "displayName": "key"
+    "displayName": "key",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,6 +13,12 @@
   "pluginOptions": {},
   "attributes": {
     "bypass_key": {
+      "type": "string"
+    },
+    "generated_key": {
+      "type": "string"
+    },
+    "username": {
       "type": "string"
     }
   }
